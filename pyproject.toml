@@ -1,0 +1,14 @@
+[project]
+name = "qubits"
+version = "0.1.0"
+description = "Add your description here"
+readme = "README.md"
+requires-python = ">=3.12"
+dependencies = [
+    "matplotlib>=3.10.8",
+    "pylatexenc>=2.10",
+    "qiskit[visualization]>=2.2.3",
+    "qiskit-aer>=0.17.2",
+    "streamlit>=1.52.2",
+    "watchdog>=6.0.0",
+]
