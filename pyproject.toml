@@ -11,4 +11,5 @@ dependencies = [
     "qiskit-aer>=0.17.2",
     "streamlit>=1.52.2",
     "watchdog>=6.0.0",
+    "black>=25.12.0",
 ]

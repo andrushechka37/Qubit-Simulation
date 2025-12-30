@@ -8,14 +8,10 @@ from matplotlib.figure import Figure
 from qiskit.visualization import plot_histogram
 from qiskit_aer import AerSimulator
 
-_CIRCUIT_INSTANCE = "circuit"
-_ANGLE_INSTANCE = "angle"
-
 
 class QubitParams:
     theta: float = 0.0
     phi: float = 0.0
-
 
 
 class CircuitParams:
@@ -37,9 +33,12 @@ class CircuitParams:
         fig = cast(Figure, plot_bloch_multivector(sv))
         st.pyplot(fig, use_container_width=True)
         plt.close(fig)
-    
+
     def draw_scheme(self):
-        fig = cast(Figure, self.circuit.draw(output="mpl", initial_state=True, fold=60, scale=0.8))
+        fig = cast(
+            Figure,
+            self.circuit.draw(output="mpl", initial_state=True, fold=60, scale=0.8),
+        )
         st.pyplot(fig, use_container_width=True)
         plt.close(fig)
 
@@ -52,11 +51,3 @@ class CircuitParams:
         fig = cast(Figure, plot_histogram(counts))
         st.pyplot(fig, use_container_width=True)
         plt.close(fig)
-
-
-def get_circuit_instance():
-    if _CIRCUIT_INSTANCE not in st.session_state:
-        st.session_state[_CIRCUIT_INSTANCE] = CircuitParams(0, [])
-    return cast(CircuitParams, st.session_state[_CIRCUIT_INSTANCE])
-
-

@@ -1,0 +1,16 @@
+name: Build and test project on linux
+on: [push]
+
+jobs:
+  ubuntu-build:
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      - name: Code style check
+        run: curl -LsSf https://astral.sh/uv/install.sh | sh && uv sync --dev --upgrade && uv run black --check .
+
+      - name: Report success
+        if: success()
+        run: echo "Pipeline passed!"
