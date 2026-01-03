@@ -1,9 +1,11 @@
 import streamlit as st
 from backend.cubits import CircuitParams, QubitParams
+from backend.dynamics import DynamicQubit, DynamicParams
 from typing import cast
 
 _CIRCUIT_INSTANCE = "circuit"
 _ANGLE_INSTANCE = "angle"
+_DYNAMIC_INSTANCE = "dynamic_qubit_instance"
 
 
 class SessionState:  # stores in session state of steamlit angles and number of qubits
@@ -27,3 +29,14 @@ def get_circuit_instance():
 
 def update_circuit_instance(instance):
     st.session_state[_CIRCUIT_INSTANCE] = instance
+
+
+def get_dynamic_qubit() -> DynamicQubit:
+    if _DYNAMIC_INSTANCE not in st.session_state:
+        st.session_state[_DYNAMIC_INSTANCE] = DynamicQubit(DynamicParams())
+    return cast(DynamicQubit, st.session_state[_DYNAMIC_INSTANCE])
+
+
+def update_dynamic_qubit_instance(p: DynamicParams) -> None:
+    dq = get_dynamic_qubit()
+    dq.set_params(p)
