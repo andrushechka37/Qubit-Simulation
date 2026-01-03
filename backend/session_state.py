@@ -1,34 +1,55 @@
 import streamlit as st
-from backend.cubits import CircuitParams, QubitParams
+from backend.cubits import CircuitParams, QubitParams, GateOp
 from backend.dynamics import DynamicQubit, DynamicParams
 from typing import cast
 
 _CIRCUIT_INSTANCE = "circuit"
 _ANGLE_INSTANCE = "angle"
 _DYNAMIC_INSTANCE = "dynamic_qubit_instance"
+_OPS_INSTANCE = "ops"
 
 
-class SessionState:  # stores in session state of steamlit angles and number of qubits
-    def __init__(self, n):
-        if (
-            _ANGLE_INSTANCE not in st.session_state
-            or len(st.session_state[_ANGLE_INSTANCE]) != n
+class SessionState:  # stores in session state of streamlit angles, gates, etc.
+    def __init__(self, n: int):
+        # angles
+        if (_ANGLE_INSTANCE not in st.session_state) or (
+            len(st.session_state[_ANGLE_INSTANCE]) != n
         ):
             st.session_state[_ANGLE_INSTANCE] = [QubitParams() for _ in range(n)]
-        self.angles = st.session_state[_ANGLE_INSTANCE]
 
-    def get_qubit_object_by_number(self, number):
+            st.session_state[_OPS_INSTANCE] = []
+
+        # ops
+        if _OPS_INSTANCE not in st.session_state:
+            st.session_state[_OPS_INSTANCE] = []
+
+        self.angles: list[QubitParams] = st.session_state[_ANGLE_INSTANCE]
+        self.ops: list[GateOp] = st.session_state[_OPS_INSTANCE]
+
+    def get_qubit_object_by_number(self, number: int) -> QubitParams:
         return self.angles[number]
 
 
-def get_circuit_instance():
+def get_circuit_instance() -> CircuitParams:
     if _CIRCUIT_INSTANCE not in st.session_state:
-        st.session_state[_CIRCUIT_INSTANCE] = CircuitParams(0, [])
+        st.session_state[_CIRCUIT_INSTANCE] = CircuitParams(1, [QubitParams()], [])
     return cast(CircuitParams, st.session_state[_CIRCUIT_INSTANCE])
 
 
-def update_circuit_instance(instance):
+def update_circuit_instance(instance: CircuitParams) -> None:
     st.session_state[_CIRCUIT_INSTANCE] = instance
+
+
+# --- ops helpers ---
+def clear_ops() -> None:
+    st.session_state[_OPS_INSTANCE] = []
+
+
+def pop_last_op() -> None:
+    ops = st.session_state.get(_OPS_INSTANCE, [])
+    if ops:
+        ops.pop()
+        st.session_state[_OPS_INSTANCE] = ops
 
 
 def get_dynamic_qubit() -> DynamicQubit:

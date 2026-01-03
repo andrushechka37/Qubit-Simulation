@@ -28,9 +28,9 @@ class DynamicParams:
 @dataclass
 class DynamicsResult:
     t: np.ndarray
-    probs: np.ndarray  # (T,2)
-    final_state: Any  # Statevector | DensityMatrix
-    states: list[Any]  # состояния во времени (T штук)
+    probs: np.ndarray
+    final_state: Any
+    states: list[Any]
 
 
 class DynamicQubit:
@@ -108,8 +108,6 @@ class DynamicQubit:
             raise RuntimeError("No dynamics result yet. Call simulate() first.")
         return self._last
 
-    # ----- drawing (как в твоём CircuitParams) -----
-
     def draw_probs(self) -> None:
         if self._last is None:
             st.info("Нажми «Симулировать поле» слева.")
@@ -141,15 +139,12 @@ class DynamicQubit:
         r = self._ensure()
         st.subheader("Распределение вероятностей")
 
-        # финальные вероятности
         p0 = float(r.probs[-1, 0])
         p1 = float(r.probs[-1, 1])
 
-        # 1) clamp
         p0 = min(max(p0, 0.0), 1.0)
         p1 = min(max(p1, 0.0), 1.0)
 
-        # 2) normalize
         s = p0 + p1
         if not np.isfinite(s) or s <= 0.0:
             st.error(
@@ -160,7 +155,6 @@ class DynamicQubit:
         p0 /= s
         p1 /= s
 
-        # иногда удобно вывести контроль
         st.caption(
             f"Финальные вероятности (норм.): P0={p0:.6f}, P1={p1:.6f}, sum={p0+p1:.6f}"
         )
@@ -183,12 +177,10 @@ class DynamicQubit:
 
         r = self._ensure()
 
-        # Операторы Паули как Operator (как у тебя в simulate)
         X = Operator.from_label("X")
         Y = Operator.from_label("Y")
         Z = Operator.from_label("Z")
 
-        # Посчитаем ожидания во времени
         x_data = np.array(
             [float(s.expectation_value(X).real) for s in r.states], dtype=float
         )
@@ -201,7 +193,6 @@ class DynamicQubit:
 
         st.subheader("Компоненты вектора Блоха во времени: ⟨X⟩, ⟨Y⟩, ⟨Z⟩")
 
-        # Streamlit line_chart любит DataFrame с индексом
         df = pd.DataFrame(
             {"t": r.t, "<X>": x_data, "<Y>": y_data, "<Z>": z_data}
         ).set_index("t")

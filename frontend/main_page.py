@@ -26,6 +26,7 @@ st.markdown(
 st.page_link("frontend/dyn.py", label="➡️ Динамическая модель")
 st.markdown("Симуляция распределения кубитов при воздействии на них поля")
 
-st.markdown(
-    "#### [Исходные файлы симулятора](https://github.com/andrushechka37/Qubit-Simulation)"
+st.link_button(
+    "Исходные файлы симулятора (GitHub)",
+    "https://github.com/andrushechka37/Qubit-Simulation",
 )
