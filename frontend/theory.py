@@ -143,9 +143,6 @@ img_path = Path(__file__).resolve().parent / "images" / "13.png"
 st.image(str(img_path), caption="...", use_container_width=True)
 
 
-
-
-
 st.markdown("## Нелинейность джозефсоновского перехода и джозефсоновская индуктивность")
 img_path = Path(__file__).resolve().parent / "images" / "14.png"
 st.image(str(img_path), caption="...", use_container_width=True)
@@ -174,7 +171,9 @@ st.markdown(
     "Связь между током, напряжением и разностью фаз задаётся **уравнениями Джозефсона**:"
 )
 
-st.markdown("[Вывод уравнений](https://www.wmi.badw.de/fileadmin/WMI/Lecturenotes/FOPRA/Manual_FOPRA__16_20211029.pdf?utm_source=chatgpt.com)")
+st.markdown(
+    "[Вывод уравнений](https://www.wmi.badw.de/fileadmin/WMI/Lecturenotes/FOPRA/Manual_FOPRA__16_20211029.pdf?utm_source=chatgpt.com)"
+)
 
 # (8)
 st.latex(
@@ -296,43 +295,60 @@ st.latex(r"H = E_{CJ}\left(N - \frac{Q_r}{2e}\right)^2 - E_J\cos\varphi \qquad")
 st.markdown("где")
 
 
+st.latex(
+    r"E_J\cos\varphi \text{ - энергия Джозефсона туннелирования куперовских пар через переход}"
+)
 
-st.latex(r"E_J\cos\varphi \text{ - энергия Джозефсона туннелирования куперовских пар через переход}")
-
-st.markdown(r"""
+st.markdown(
+    r"""
 Заряд островка квантуется куперовскими парами. 
 Каждая куперовская пара имеет заряд \(2e\), поэтому заряд островка равен
-""")
+"""
+)
 
-st.latex(r"""
+st.latex(
+    r"""
 Q_{\text{остр}} = 2e\,N, \qquad N \in \mathbb{Z}
-""")
+"""
+)
 
-st.markdown(r"""
+st.markdown(
+    r"""
 В реальной схеме присутствует также смещённый (остаточный) заряд Qr,
 возникающий из-за затворного электрода, фоновых зарядов и ловушек.
 Он задаёт сдвиг нуля заряда, поэтому эффективный заряд на конденсаторе равен
-""")
+"""
+)
 
-st.latex(r"""
+st.latex(
+    r"""
 Q = 2eN - Q_r
-""")
+"""
+)
 
-st.markdown(r"""
+st.markdown(
+    r"""
 Электростатическая энергия конденсатора
-""")
+"""
+)
 
-st.latex(r"""
+st.latex(
+    r"""
 U_C = \frac{Q^2}{2C_J}
-""")
+"""
+)
 
-st.markdown(r"""
+st.markdown(
+    r"""
 Тогда зарядовая часть гамильтониана записывается в виде
-""")
+"""
+)
 
-st.latex(r"""
+st.latex(
+    r"""
 U_C = E_{CJ}\left(N - \frac{Q_r}{2e}\right)^2
-""")
+"""
+)
 
 
 st.markdown(

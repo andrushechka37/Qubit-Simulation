@@ -6,7 +6,9 @@ from backend.session_state import get_dynamic_qubit, update_dynamic_qubit_instan
 
 st.title("Динамическая модель")
 
-st.markdown("Для изучения поведения кубита под воздействием ЭМ поля было выбрано использовать слудующую модель гамильтониана: ")
+st.markdown(
+    "Для изучения поведения кубита под воздействием ЭМ поля было выбрано использовать слудующую модель гамильтониана: "
+)
 st.latex(
     r"""
 H = \frac{1}{2}\, 2\pi \nu_z\, Z \;+\; 2\pi \nu_x \cos\!\left(2\pi \nu_d t\right)\, X"""
@@ -25,7 +27,9 @@ Z=\begin{pmatrix}1&0\\[2pt]0&-1\end{pmatrix}.
 """
 )
 
-st.markdown("[Вывод данной модели](https://github.com/Qiskit/platypus/blob/main/notebooks/v2/quantum-hardware-pulses/transmon-physics.ipynb)")
+st.markdown(
+    "[Вывод данной модели](https://github.com/Qiskit/platypus/blob/main/notebooks/v2/quantum-hardware-pulses/transmon-physics.ipynb)"
+)
 
 nu_z = st.sidebar.slider("ν_z (частота кубита)", 0.1, 10.0, 5.0, 0.01)
 nu_d = st.sidebar.slider("ν_d (частота вн. сигнала)", 0.1, 10.0, 5.0, 0.01)
@@ -42,18 +46,6 @@ st.markdown("### Параметры динамической модели")
 st.latex(r"\nu_z \; \text{— собственная частота кубита.}")
 st.latex(r"\nu_x \; \text{— амплитуда управляющего воздействия.}")
 st.latex(r"\nu_d \; \text{— частота внешнего сигнала.}")
-
-
-
-
-
-
-
-
-
-
-
-
 
 
 p = DynamicParams(
