@@ -9,8 +9,9 @@ def set_pages_st():
     how_it_works = st.Page("frontend/how_work.py", title="Реализация")
     static = st.Page("frontend/static.py", title="Статическая модель")
     dyn = st.Page("frontend/dyn.py", title="Динамеческая модель")
+    con = st.Page("frontend/conclusions.py", title="Выводы")
 
-    pg = st.navigation([main_page, theory, how_it_works, static, dyn])
+    pg = st.navigation([main_page, theory, how_it_works, static, dyn, con])
     return pg
 
 
