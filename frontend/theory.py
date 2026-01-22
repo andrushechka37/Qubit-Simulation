@@ -217,7 +217,7 @@ st.markdown(
 )
 
 # (10)
-st.latex(r"V = L\,\dfrac{\partial I}{\partial t}")
+st.latex(r"V = - L\,\dfrac{\partial I}{\partial t}")
 
 st.markdown("Из уравнений Джозефсона получаем выражение")
 
